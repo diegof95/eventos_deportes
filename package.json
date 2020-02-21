@@ -1,0 +1,24 @@
+{
+  "name": "eventos_deportes",
+  "version": "1.0.0",
+  "description": "Front end dependencies for eventos_deportes django project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/diegof95/eventos_deportes.git"
+  },
+  "author": "diegof95",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/diegof95/eventos_deportes/issues"
+  },
+  "homepage": "https://github.com/diegof95/eventos_deportes#readme",
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "jquery": "^3.4.1",
+    "popper.js": "^1.16.1"
+  }
+}
