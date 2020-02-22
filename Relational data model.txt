@@ -1,0 +1,92 @@
+// Eventos deportes - Relational data model.
+
+Event (
+    id : int PK,
+    name : string NOT NULL,
+    descrip : string,
+    date : date,
+    hour : time,
+    state : string NOT NULL,
+    picture : string,
+    type : int FK NOT NULL,
+    stadium : int FK,
+    creator : int FK->User[manager]
+)
+
+EventType (
+    id : int PK,
+    name : string NOT NULL
+)
+
+Stadium (
+    id : int PK,
+    name : string NOT NULL,
+    address : string
+)
+
+Location (
+    id : int,
+    name : string NOT NULL,
+    stadium : int FK NOT NULL,
+    aforo : int,
+    PK(id, stadium)
+)
+
+LocationEvent (
+    event : int FK,
+    stadium : int FK,
+    location : int FK,
+    price : real NOT NULL,
+    PK(event, stadium, location)
+)
+
+User (
+    id : int PK,
+    name : string NOT NULL,
+    last_name : string NOT NULL,
+    email : string NOT NULL,
+    phone_number : string,
+    address : string,
+    role : string NOT NULL,
+    state : string NOT NULL
+)
+
+Ticket (
+    id : int PK,
+    // [LocationEvent]
+    event : int FK,
+    stadium : int FK,
+    location : int FK,
+    // [/LocationEvent]
+    place : string,
+    state : string NOT NULL,
+    client : int FK->User[client]
+)
+
+Bill (
+    id : int PK,
+    date_time : dateTime NOT NULL,
+    client : int FK->User[client],
+    seller : int FK->User[seller],
+    subtotal : real --calculated,
+    total : real --calculated
+)
+
+BillTickets (
+    bill : int FK,
+    ticket : int FK
+    PK(bill, ticket)
+)
+
+Tax (
+    id : int PK,
+    name : string NOT NULL,
+    descrip : string,
+    value : real NOT NULL,
+)
+
+BillTaxes (
+    bill : int FK,
+    tax : int FK,
+    PK(bill, tax)
+)
