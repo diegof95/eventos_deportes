@@ -27,7 +27,7 @@ SECRET_KEY = 'n1rb!45+fgo7#6zuegz=bw5md7mor%zmqyhxtebzfd99h=gk5c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.us-east-2.compute.amazonaws.com']
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'usuarios'
 ]
 
 AUTH_USER_MODEL = 'usuarios.Usuario'
@@ -78,9 +79,17 @@ WSGI_APPLICATION = 'eventos_deportes.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+      'ENGINE':'django.db.backends.postgresql',
+      'NAME': 'eventos_deportes',
+      'USER': 'ed_admin59',
+      'PASSWORD': '9baffWihFVGx2eEpK1fv',
+      'HOST': 'eventos-deportes.cwhazwjn2fo7.us-east-2.rds.amazonaws.com',
+      'PORT': '5432'
     }
 }
 
