@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  {% load static %}
+  
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  {% block head %}
+  
+  {% endblock %}
+  <link rel="stylesheet" href="{% static 'dist/css_libs.css' %}" type="text/css" />
+  <script type="text/javascript" src="{% static 'dist/css_libs.js' %}" defer="defer"></script>
+
+</head>
+<body>
+  {% include 'navbar.html' %}
+  {% block content %}
+  
+  {% endblock %}
+</body>
