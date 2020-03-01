@@ -10,7 +10,7 @@ class Estadio(models.Model):
         return self.nombre
         
 class LocalidadEstadio(models.Model):
-    localidad = nombre = models.CharField(max_length=25)
+    localidad = models.CharField(max_length=25)
     estadio = models.ForeignKey(Estadio, on_delete=models.CASCADE)
     aforo = models.PositiveIntegerField()
 
