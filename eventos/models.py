@@ -2,24 +2,15 @@ from django.db import models
 from django.urls import reverse
 from django.core import validators
 
+from usuarios.models import Usuario
+
 class Estadio(models.Model):
     nombre = models.CharField(max_length=50)
     ubicacion = models.CharField(max_length=50, null=True,blank=True)
+    max_capacidad = models.PositiveIntegerField()
 
     def __str__(self):
         return self.nombre
-        
-class LocalidadEstadio(models.Model):
-    localidad = models.CharField(max_length=25)
-    estadio = models.ForeignKey(Estadio, on_delete=models.CASCADE)
-    aforo = models.PositiveIntegerField()
-
-    class Meta:
-        unique_together = ('localidad', 'estadio')
-        verbose_name_plural = "Localidades Estadio"
-
-    def __str__(self):
-        return "{}, {}".format(self.estadio.__str__(), self.localidad)
 
 class TipoEvento(models.Model):
     nombre = models.CharField(max_length=16)
@@ -51,10 +42,11 @@ class Evento(models.Model):
     estado = models.CharField(max_length=12, choices=ESTADOS)
 
     estadio = models.ForeignKey(Estadio, on_delete=models.CASCADE)
-    localidades = models.ManyToManyField(LocalidadEstadio, through='LocalidadEvento')
 
     creado = models.DateField(auto_now_add=True)
     modificado = models.DateField(auto_now=True)
+    
+    creador = models.ForeignKey(Usuario, on_delete=models.CASCADE, null=True)
 
     def get_absolute_url(self):
         
@@ -66,8 +58,9 @@ class Evento(models.Model):
 class LocalidadEvento(models.Model):
 
     evento = models.ForeignKey(Evento, on_delete=models.CASCADE)
-    localidad = models.ForeignKey(LocalidadEstadio, on_delete=models.CASCADE)
-
+    localidad = models.CharField(max_length=20)
+    aforo = models.PositiveIntegerField()
+    
     # Representa desde 0 hasta ((10E15)-1),99 en pesos.
     precio = models.DecimalField(
         max_digits=17,
@@ -80,4 +73,4 @@ class LocalidadEvento(models.Model):
         verbose_name_plural = "Localidades Evento"
 
     def __str__(self):
-        return "{}: {}".format(self.evento.__str__(), self.localidad.__str__())
+        return "{}: {}".format(self.evento.__str__(), self.localidad)

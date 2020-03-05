@@ -21,23 +21,18 @@ EventType (
 Stadium (
     id : int PK,
     name : string NOT NULL,
-    address : string
-)
-
-Location (
-    id : int,
-    name : string NOT NULL,
-    stadium : int FK NOT NULL,
-    aforo : int,
-    PK(id, stadium)
+    address : string,
+    max_capacity : int NOT NULL
 )
 
 LocationEvent (
+    id : int,
     event : int FK,
-    stadium : int FK,
-    location : int FK,
+    location : string,
+    capacity : int NOT NULL,
     price : real NOT NULL,
-    PK(event, stadium, location)
+    PK(id, event),
+    KEY(event, location)
 )
 
 User (
