@@ -7,3 +7,6 @@ class EventoForm(forms.ModelForm):
     class Meta:
         model = Evento
         fields = ['tipo', 'nombre', 'descripcion', 'imagen', 'fecha', 'hora', 'estadio', 'estado']
+        widgets = {
+            'fecha': forms.TextInput(attrs={'type': 'date'})
+        }

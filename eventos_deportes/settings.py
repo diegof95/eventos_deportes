@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # django_widget_tweaks: html-like syntax in templates to modify HTML form field properties
+    'widget_tweaks',
+    #
     'usuarios',
     'eventos',
 ]

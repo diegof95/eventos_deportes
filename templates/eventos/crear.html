@@ -1,5 +1,6 @@
 {% extends 'base.html' %} 
 {% load static %}
+{% load widget_tweaks %}
 
 {% block head %}
   <title>Eventos Deportes | Crear Evento</title>
@@ -41,7 +42,7 @@
       <label for="">Descripción:</label>
       <div class="input-group">
         <span class="input-group-prepend"><i class="fas fa-info-circle"></i></span>
-        {{form.descripcion}}
+        {{form.descripcion|add_class:"form-control"}}
       </div>
       <br>
       <label for="">Imagen:</label>
@@ -53,13 +54,13 @@
       <label for="">Fecha:</label>
       <div class="input-group">
         <span class="input-group-prepend"><i class="fas fa-calendar-o"></i></span>
-        {{form.fecha}}
+         {% render_field form.fecha class="form-control" %}
       </div>
       <br>
       <label for="">Hora:</label>
      <div class="input-group">
         <span class="input-group-prepend"><i class="fas fa-clock-o"></i></span>
-        {{form.hora}}
+        {% render_field form.hora type="time" class="form-control" %}
       </div>
       <br>
       <label for="">Estadio:</label>

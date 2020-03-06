@@ -11,5 +11,5 @@ class CrearView(generic.CreateView):
     template_name = 'eventos/crear.html'
     form_class= EventoForm
     model = Evento
-    success_url = reverse_lazy('')
+    success_url = reverse_lazy('home')
 
