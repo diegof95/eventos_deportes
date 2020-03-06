@@ -14,66 +14,63 @@
     <form method="POST">
       {% csrf_token %}
       
-      {% for field in form %}
-        {% for error in field.errors %}
-          <div class="alert alert-danger">
-            <strong>{{ error|escape }}</strong>
-          </div>
-        {% endfor %}
-      {% endfor %}
       {% for error in form.non_field_errors %}
         <div class="alert alert-danger">
           <strong>{{ error|escape }}</strong>
         </div>
       {% endfor %}
-
-      <label for="">Tipo:</label>
+      
+      <label for="id_tipo">Tipo:</label>
       <div class="input-group">
-        <span class="input-group-prepend"><i class="fas fa-futbol-o"></i></span>
-        {{form.tipo}}
+        <span class="input-group-prepend input-group-text"><i class="fas fa-futbol-o"></i></span>
+        {% render_field form.tipo class="custom-select" %}
       </div>
       <br>
-      <label for="">Nombre:</label>
+      <label for="id_nombre">Nombre:</label>
       <div class="input-group">
-        <span class="input-group-prepend"><i class="fas fa-flag-o"></i></span>
-        {{form.nombre}}
+        <span class="input-group-prepend input-group-text"><i class="fas fa-flag-o"></i></span>
+        {% render_field form.nombre class="form-control" %}
       </div>
       <br>
-      <label for="">Descripción:</label>
+      <label for="id_descripcion">Descripción:</label>
       <div class="input-group">
-        <span class="input-group-prepend"><i class="fas fa-info-circle"></i></span>
-        {{form.descripcion|add_class:"form-control"}}
+        <span class="input-group-prepend input-group-text"><i class="fas fa-info-circle"></i></span>
+        {% render_field form.descripcion class="form-control" %}
       </div>
       <br>
-      <label for="">Imagen:</label>
+      <label for="id_imagen">Imagen:</label>
       <div class="input-group">
-        <span class="input-group-prepend"><i class="fas fa-image"></i></span>
-        {{form.imagen}}
+        <div class="input-group-prepend input-group-text"><i class="fas fa-image"></i></div>
+        <div class="custom-file">
+          {% render_field form.imagen class="custom-file-input" %}
+          <label for="id_imagen" class="custom-file-label">Escoger imagen</label>
+        </div>
       </div>
       <br>
-      <label for="">Fecha:</label>
+      <label for="id_fecha">Fecha:</label>
       <div class="input-group">
-        <span class="input-group-prepend"><i class="fas fa-calendar-o"></i></span>
-         {% render_field form.fecha class="form-control" %}
+        <span class="input-group-prepend input-group-text"><i class="fas fa-calendar-o"></i></span>
+         {% render_field form.fecha type="date" class="form-control" %}
       </div>
       <br>
-      <label for="">Hora:</label>
+      <label for="id_hora">Hora:</label>
      <div class="input-group">
-        <span class="input-group-prepend"><i class="fas fa-clock-o"></i></span>
+        <span class="input-group-prepend input-group-text"><i class="fas fa-clock-o"></i></span>
         {% render_field form.hora type="time" class="form-control" %}
       </div>
       <br>
-      <label for="">Estadio:</label>
+      <label for="id_estadio">Estadio:</label>
       <div class="input-group">
-        <span class="input-group-prepend"><i class="fas fa-map-marker"></i></span>
-        {{form.estadio}}
+        <span class="input-group-prepend input-group-text"><i class="fas fa-map-marker"></i></span>
+        {% render_field form.estadio class="custom-select" %}
       </div>
       <br>
-        <label for="">Estado:</label>
+        <label for="id_estado">Estado:</label>
         <div class="input-group">
-          <span class="input-group-prepend"><i class="fas fa-check-square"></i></span>
-          {{form.estado}}
+          <span class="input-group-prepend input-group-text"><i class="fas fa-check-square"></i></span>
+          {% render_field form.estado class="custom-select" %}
         </div>
+      <br>
       <div class="box-footer">
         <button type="submit" class="btn btn-primary">Crear</button>
       </div>
