@@ -5,8 +5,8 @@ from django.core import validators
 from usuarios.models import Usuario
 
 class Estadio(models.Model):
-    nombre = models.CharField(max_length=50)
-    ubicacion = models.CharField(max_length=50, null=True,blank=True)
+    nombre = models.CharField(max_length=100)
+    ubicacion = models.CharField(max_length=100, null=True,blank=True)
     max_capacidad = models.PositiveIntegerField()
 
     def __str__(self):
@@ -24,8 +24,8 @@ class TipoEvento(models.Model):
 class Evento(models.Model):
 
     tipo = models.ForeignKey(TipoEvento, on_delete=models.CASCADE)
-    nombre = models.CharField(max_length=25)
-    descripcion = models.CharField(max_length=70, null=True, blank=True)
+    nombre = models.CharField(max_length=100)
+    descripcion = models.CharField(max_length=250, null=True, blank=True)
     fecha = models.DateField()
     hora = models.TimeField()
     imagen = models.ImageField(
@@ -46,8 +46,12 @@ class Evento(models.Model):
     creado = models.DateField(auto_now_add=True)
     modificado = models.DateField(auto_now=True)
     
-    creador = models.ForeignKey(Usuario, on_delete=models.CASCADE, null=True)
-
+    creador = models.ForeignKey(Usuario, on_delete=models.CASCADE, blank=True, null=True)
+    
+    @classmethod
+    def get_estados(cls):
+        return cls.ESTADOS
+    
     def get_absolute_url(self):
         
         return reverse('eventos:detalles', kwargs={'pk': self.id})
@@ -58,7 +62,7 @@ class Evento(models.Model):
 class LocalidadEvento(models.Model):
 
     evento = models.ForeignKey(Evento, on_delete=models.CASCADE)
-    localidad = models.CharField(max_length=20)
+    localidad = models.CharField(max_length=35)
     aforo = models.PositiveIntegerField()
     
     # Representa desde 0 hasta ((10E15)-1),99 en pesos.
