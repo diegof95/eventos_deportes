@@ -10,14 +10,14 @@
 {% endblock %}
 
 {% block content %}
-  <div class="container px3">
+  <div class="container my-4">
     {% regroup eventos by get_estado_display as eventos_estado %}
     <ul class="list-group ">
       {% for estado in eventos_estado %}
         <li class="list-group-item">{{ estado.grouper }}
           <ul>
             {% for evento in estado.list %}
-              <li>
+              <li class="d-flex justify-content-between align-items-center">
                 {% if evento.imagen %}
                   <img src="{{evento.imagen.url }}" class="img-circle" alt="Imagen Evento" height=30px width=30px>
                 {% else %}

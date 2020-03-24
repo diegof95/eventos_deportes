@@ -1,18 +1,20 @@
 from django.urls import reverse_lazy,reverse
 from django.views import generic
-
+from django.contrib import messages
+from django.contrib.messages import views as message_views
 #from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Evento
 from .forms import EventoForm
 
-class CrearView(generic.edit.CreateView):
+class CrearView(message_views.SuccessMessageMixin, generic.edit.CreateView):
     """ Crear view """
 
     template_name = 'eventos/crear.html'
     form_class= EventoForm
     model = Evento
     success_url = reverse_lazy('home')
+    success_message = "El evento %(nombre)s fue creado con éxito"
 
 class ListarView(generic.list.ListView):
     
