@@ -1,0 +1,25 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% load widget_tweaks %}
+
+{% block head %}
+  <title>Eventos Deportes | Localidades Evento</title>
+  <meta name="description" content="Administrar localidades para un Evento">
+  <meta name="author" content="diegof95">
+{% endblock %}
+
+{% block content %}
+  <div class="container my-4">
+    <h1>Localidades para el Evento {{evento}}</h1>
+    <form  method="POST">
+      {% csrf_token %}
+          
+      {{ formset.management_form }}
+      {{ formset }}
+
+      <div class="">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+    </form> 
+  </div>
+{% endblock %}

@@ -53,7 +53,6 @@ class Evento(models.Model):
         return cls.ESTADOS
     
     def get_absolute_url(self):
-        
         return reverse('eventos:detalles', kwargs={'pk': self.id})
 
     def __str__(self):
